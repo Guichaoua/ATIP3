@@ -4,6 +4,6 @@ ATIP3 is a tumor suppressor protein encoded by the *MTUS1* gene and is involved 
 
 ATIP3, in particular, is frequently downregulated in triple-negative breast cancer (TNBC), where its loss has been associated with increased aggressiveness and poor prognosis.
 
-The notebook `./tests/MTUS1_Transcripts.ipynb` analyzes the transcript-level expression of MTUS1 isoforms (ATIP family) across CCLE cancer cell lines, using RNA-seq data, with a focus on isoform-specific patterns across different TCGA cancer types.
+The notebook `./tests/MTUS1_Transcripts.ipynb` analyzes the transcript-level expression of MTUS1 isoforms (ATIP family) across CCLE cancer cell lines, using RNA-seq data, with a focus on isoform-specific patterns across different TCGA cancer types (**Appendix B** of my thesis).
 
-This notebook `./tests/Depmap_sensitivity_v1.ipynb` assembles the analyses used to produce **Tables B.2 and B.3** in **Appendix B** (referenced in **Chapter 5** of my thesis). It screens drugs whose efficacy varies with the expression level of a gene of interest (e.g., *MTUS1* / ATIP3) across cancer cell lines, using  **PRISM** and **GDSC2** panels.
+The notebook `./tests/Depmap_sensitivity_v1.ipynb` assembles the analyses used to produce **Tables B.2 and B.3** in **Appendix B** (referenced in **Chapter 5** of my thesis). It screens drugs whose efficacy varies with the expression level of a gene of interest (e.g., *MTUS1* / ATIP3) across cancer cell lines, using  **PRISM** and **GDSC2** panels.
