@@ -449,7 +449,7 @@ def correlate_gene_effect_with_expression(effect_df, expression_df, effect_gene=
 
 def correlate_selected_genes_with_expression(effect_df, expression_df, expr_gene='MTUS1', genes=[]):
     """
-    Correlates the expression of a selected gene with the effect of other genes. 
+    Correlates the expression of a selected gene with the dependency effect of other genes.
 
     Args:
         effect_df (pd.DataFrame): DataFrame containing gene effect data.
