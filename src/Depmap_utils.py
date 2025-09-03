@@ -127,7 +127,17 @@ def load_merge_data( dict_filters, list_mutation, drop_mutation=False, keep_only
         grouped_Genetic_features_filtered = grouped_Genetic_features[mask].copy()
         df_2 = df_1.merge(grouped_Genetic_features_filtered, on='COSMIC_ID')
     
-    return df_2
+    # 4. Final cleanup
+    try:
+        df_2.drop_duplicates(inplace=True)
+    except:
+        pass
+    
+    # 5. Filter expression_df to keep only relevant samples
+    depmap_id_list = df_2['DepMap_ID'].unique().tolist()
+    expression_df = df_1[df_1['DepMap_ID'].isin(depmap_id_list)][['DepMap_ID'] + expr_keep]
+    
+    return df_2, expression_df
 
 def load_prism_data():
     """
@@ -219,9 +229,9 @@ def load_data_sensitivity( dict_filters, list_mutation, target_genes,
         gdsc = load_prism_data()
 
     # 2. load data
-    df_2 = load_merge_data(dict_filters, list_mutation, drop_mutation=drop_mutation, keep_only_mutation=keep_only_mutation, expr_keep=expr_keep)
+    df_2,_ = load_merge_data(dict_filters, list_mutation, drop_mutation=drop_mutation, keep_only_mutation=keep_only_mutation, expr_keep=expr_keep)
 
-    # 5. Filter drug response data by target genes (if any)
+    # 3. Filter drug response data by target genes (if any)
     if target_genes:
         def target_match(x):
             if pd.isna(x):
@@ -231,13 +241,13 @@ def load_data_sensitivity( dict_filters, list_mutation, target_genes,
     else:
         gdsc_filtered = gdsc.copy()
 
-    # 6. Merge with drug data on appropriate key
+    # 4. Merge with drug data on appropriate key
     if gdsc_n == 'prism':
         merged_df = pd.merge(df_2, gdsc_filtered, on='DepMap_ID', how='inner')
     else:
         merged_df = pd.merge(df_2, gdsc_filtered, on='COSMIC_ID', how='inner')
 
-    # 7. Cleanup and sort
+    # 5. Cleanup and sort
     try:
         merged_df.drop_duplicates(inplace=True)
     except:
